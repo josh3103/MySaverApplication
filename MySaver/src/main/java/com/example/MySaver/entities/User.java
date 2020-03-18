@@ -12,13 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import com.mastek.jobapp.entities.Job;
 
 
 @Entity
@@ -43,14 +43,15 @@ public class User implements Serializable {
 	}
 	
 	// many to one relationship
-		private Set<Account> group = new HashSet<>();
+		private Set<SaverAccount> group = new HashSet<>();
 		
-		@ManyToOne(mappedBy = "assignments", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-		public Set<Account> getGroup() {
+		@ManyToOne(optional=false)
+				//mappedBy = "assignments", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+		public Set<SaverAccount> getGroup() {
 			return group;
 		}
 		
-		public void setGroup(Set<Account> group) {
+		public void setGroup(Set<SaverAccount> group) {
 			this.group = group;
 		}
 
